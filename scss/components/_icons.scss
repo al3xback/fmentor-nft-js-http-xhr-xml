@@ -1,0 +1,20 @@
+@use '../abstracts/functions' as func;
+
+[class^='icon-'] {
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.icon-ethereum {
+	width: func.em(11);
+	height: func.em(18);
+	background-image: url('../images/icons/ethereum.svg');
+}
+
+.icon-clock {
+	width: func.em(16);
+	height: func.em(16);
+	background-image: url('../images/icons/clock.svg');
+}
