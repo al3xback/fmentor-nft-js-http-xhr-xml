@@ -8,10 +8,10 @@ const URL =
 
 const renderCardContent = (data) => {
 	const parser = new DOMParser();
-	const cardDoc = parser.parseFromString(data, 'text/xml');
+	const dataDoc = parser.parseFromString(data, 'text/xml');
 
 	const getElementValue = (el) => {
-		return cardDoc.getElementsByTagName(el)[0].childNodes[0].nodeValue;
+		return dataDoc.getElementsByTagName(el)[0].childNodes[0].nodeValue;
 	};
 
 	const image = getElementValue('image');
@@ -22,7 +22,8 @@ const renderCardContent = (data) => {
 	const authorName = getElementValue('author_name');
 	const authorImage = getElementValue('author_image');
 
-	const cardEl = document.importNode(cardTemplate.content, true);
+	const cardTemplateNode = document.importNode(cardTemplate.content, true);
+	const cardEl = cardTemplateNode.querySelector('.card');
 
 	const cardImageEl = cardEl.querySelector('.card__image img');
 	cardImageEl.src = './images/' + image;
