@@ -35,10 +35,18 @@
 		<script src="js/main.js" defer type="module"></script>
 	</head>
 	<body>
+		<style>
+			.card-wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+		</style>
+
 		<template id="card-template">
 			<article class="card">
 				<div class="card__image">
-					<img width="302" height="302" src="" alt="" />
+					<img width="302" height="302" />
 				</div>
 				<div class="card__content">
 					<h2 class="card__title">
@@ -56,12 +64,7 @@
 						</li>
 					</ul>
 					<div class="card__author">
-						<img
-							class="card__author-img"
-							width="33"
-							height="33"
-							src=""
-							alt="" />
+						<img class="card__author-img" width="33" height="33" />
 						<span class="card__author-desc"
 							>Creation of <a href="#" class="btn btn--link"></a
 						></span>
@@ -75,7 +78,11 @@
 		</header>
 
 		<main>
-			<div class="container"></div>
+			<div class="container">
+				<div class="card-wrapper">
+					<p class="loading">Fetching card data...</p>
+				</div>
+			</div>
 		</main>
 
 		<footer>

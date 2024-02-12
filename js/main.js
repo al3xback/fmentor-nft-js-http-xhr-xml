@@ -1,10 +1,23 @@
 import { sendHttpRequest } from './util.js';
 
-const mainContainerEl = document.querySelector('main .container');
+const cardWrapperEl = document.querySelector('.card-wrapper');
 const cardTemplate = document.getElementById('card-template');
+const loadingEl = document.querySelector('.loading');
 
 const URL =
-	'https://gist.githubusercontent.com/al3xback/4c136702c7439539a813392d33ec79d6/raw/f9413de6ba10c7526524e0182eacc973c67abc3c/nft-data.xml';
+	'https://gist.githubusercontent.com/al3xback/4c136702c7439539a813392d33ec79d6/raw/6bdb5f77cbcbdfc3d09f7cb462647e239404f5bb/nft-data.xml';
+
+const removeLoading = () => {
+	loadingEl.parentElement.removeChild(loadingEl);
+};
+
+const handleError = (msg) => {
+	removeLoading();
+
+	const errorEl = document.createElement('p');
+	errorEl.textContent = msg;
+	cardWrapperEl.appendChild(errorEl);
+};
 
 const renderCardContent = (data) => {
 	const parser = new DOMParser();
@@ -50,7 +63,8 @@ const renderCardContent = (data) => {
 	const cardAuthorNameEl = cardEl.querySelector('.card__author-desc a');
 	cardAuthorNameEl.textContent = authorName;
 
-	mainContainerEl.appendChild(cardEl);
+	removeLoading();
+	cardWrapperEl.appendChild(cardEl);
 };
 
-sendHttpRequest('GET', URL, renderCardContent);
+sendHttpRequest('GET', URL, renderCardContent, handleError);
