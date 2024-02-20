@@ -36,24 +36,24 @@ const renderCardContent = (data) => {
 		return element.childNodes[0].nodeValue;
 	};
 
-	const image = getElementValue('image');
 	const title = getElementValue('title');
 	const description = getElementValue('description');
+	const image = getElementValue('image');
 	const status = getElementValue('status');
 	const author = getElementValue('author');
 
 	const cardTemplateNode = document.importNode(cardTemplate.content, true);
 	const cardEl = cardTemplateNode.querySelector('.card');
 
-	const cardImageEl = cardEl.querySelector('.card__image img');
-	cardImageEl.src = './images/' + image;
-	cardImageEl.alt = image.substring(0, image.indexOf('.'));
-
 	const cardTitleEl = cardEl.querySelector('.card__title a');
 	cardTitleEl.textContent = title;
 
 	const cardDescEl = cardEl.querySelector('.card__desc');
 	cardDescEl.textContent = description;
+
+	const cardImageEl = cardEl.querySelector('.card__image img');
+	cardImageEl.src = './images/' + image;
+	cardImageEl.alt = image.substring(0, image.indexOf('.'));
 
 	const cardStatusItemEls = cardEl.querySelectorAll('.card__stats-list-item');
 	const cardEthereumAmountEl = cardStatusItemEls[0];
