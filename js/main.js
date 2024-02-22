@@ -5,6 +5,8 @@ const URL =
 
 const cardWrapperEl = document.querySelector('.card-wrapper');
 const cardTemplate = document.getElementById('card-template');
+const cardImageTemplate = document.getElementById('card-image-template');
+const cardContentTemplate = document.getElementById('card-content-template');
 const loadingEl = document.querySelector('.loading');
 
 const removeLoading = () => {
@@ -45,30 +47,50 @@ const renderCardContent = (data) => {
 	const cardTemplateNode = document.importNode(cardTemplate.content, true);
 	const cardEl = cardTemplateNode.querySelector('.card');
 
-	const cardTitleEl = cardEl.querySelector('.card__title a');
-	cardTitleEl.textContent = title;
-
-	const cardDescEl = cardEl.querySelector('.card__desc');
-	cardDescEl.textContent = description;
-
-	const cardImageEl = cardEl.querySelector('.card__image img');
+	/* [card image] */
+	const cardImageTemplateNode = document.importNode(
+		cardImageTemplate.content,
+		true
+	);
+	const cardImageEl = cardImageTemplateNode.querySelector('.card__image img');
 	cardImageEl.src = './images/' + image;
 	cardImageEl.alt = image.substring(0, image.indexOf('.'));
 
-	const cardStatusItemEls = cardEl.querySelectorAll('.card__stats-list-item');
+	/* [card content] */
+	const cardContentTemplateNode = document.importNode(
+		cardContentTemplate.content,
+		true
+	);
+	const cardContentEl =
+		cardContentTemplateNode.querySelector('.card__content');
+
+	const cardTitleEl = cardContentEl.querySelector('.card__title a');
+	cardTitleEl.textContent = title;
+
+	const cardDescEl = cardContentEl.querySelector('.card__desc');
+	cardDescEl.textContent = description;
+
+	const cardStatusItemEls = cardContentEl.querySelectorAll(
+		'.card__stats-list-item'
+	);
 	const cardEthereumAmountEl = cardStatusItemEls[0];
 	cardEthereumAmountEl.querySelector('span').textContent = status[0];
 	const cardRemainingTimeEl = cardStatusItemEls[1];
 	cardRemainingTimeEl.querySelector('span').textContent = status[1];
 
-	const cardAuthorImageEl = cardEl.querySelector('.card__author-img');
+	const cardAuthorImageEl = cardContentEl.querySelector('.card__author-img');
 	cardAuthorImageEl.src = './images/' + author[1];
 	cardAuthorImageEl.alt = author[0];
 
-	const cardAuthorNameEl = cardEl.querySelector('.card__author-desc a');
+	const cardAuthorNameEl = cardContentEl.querySelector(
+		'.card__author-desc a'
+	);
 	cardAuthorNameEl.textContent = author[0];
 
+	/* [init] */
 	removeLoading();
+	cardEl.appendChild(cardImageTemplateNode);
+	cardEl.appendChild(cardContentTemplateNode);
 	cardWrapperEl.appendChild(cardTemplateNode);
 };
 
